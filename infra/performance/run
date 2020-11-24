@@ -1,0 +1,13 @@
+#!env/bin/python
+
+import click
+
+@click.command()
+@click.option('--count', default=100, help='Number of requests to make')
+def hello(count):
+    for i in range(count):
+        print(f"i", end=";")
+
+
+if __name__ == "__main__":
+    hello()

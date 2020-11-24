@@ -61,10 +61,10 @@ public class CommentController {
 	@JsonView(JacksonView.forCommentRequest.class)
 	public ResponseEntity<Comment> createComment(@PathVariable("cocktailId") Integer cocktailId, @RequestBody Comment comment, HttpSession session) {
 		if (session.getAttribute("userId") == null) {
-			return new ResponseEntity<Comment>(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		}
 		
-		return new ResponseEntity<Comment>(this.commentService.createComment(cocktailId, (Integer) session.getAttribute("userId"), comment), HttpStatus.OK);
+		return new ResponseEntity<>(this.commentService.createComment(cocktailId, (Integer) session.getAttribute("userId"), comment), HttpStatus.OK);
 	}
 
 	@GetMapping("/api/cocktail/{cocktailId}/comments")

@@ -15,8 +15,8 @@ import java.io.FileReader;
 
 @Component
 public class DataLoader implements ApplicationRunner {
-    private BartenderRepository bartenderRepository;
-    private GlassRepository glassRepository;
+    private final BartenderRepository bartenderRepository;
+    private final GlassRepository glassRepository;
 
     @Autowired
     public DataLoader(BartenderRepository bartenderRepository, GlassRepository glassRepository) {

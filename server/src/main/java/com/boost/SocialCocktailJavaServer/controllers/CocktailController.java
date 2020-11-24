@@ -77,9 +77,4 @@ public class CocktailController {
 		}
 		return new ResponseEntity<>(this.cocktailService.createTip(cocktailId, tip, (Integer) session.getAttribute("userId")), HttpStatus.OK);
 	}
-
-//	@GetMapping("/api/cocktail/{cocktailId}/comments")
-//	public List<Comment> findCommentsByCocktailId(@PathVariable("cocktailId") Integer cocktailId) {
-//		return this.commentService.findCommentsByCocktailId(cocktailId);
-//	}
 }
