@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="116.34821428571428" y="0.0">com.boost.SocialCocktailJavaServer.models.User</node>
+    <node x="226.5357142857143" y="886.0">com.boost.SocialCocktailJavaServer.models.Comment</node>
+    <node x="0.0" y="582.0">com.boost.SocialCocktailJavaServer.models.Cocktail</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.boost.SocialCocktailJavaServer.models.Comment" target="com.boost.SocialCocktailJavaServer.models.User">
+      <point x="18.8125" y="-170.0" />
+      <point x="395.84821428571433" y="846.0" />
+      <point x="455.5" y="846.0" />
+      <point x="455.5" y="562.0" />
+      <point x="400.4107142857143" y="562.0" />
+      <point x="31.5625" y="266.0" />
+    </edge>
+    <edge source="com.boost.SocialCocktailJavaServer.models.Cocktail" target="com.boost.SocialCocktailJavaServer.models.User">
+      <point x="-55.625" y="-122.0" />
+      <point x="166.875" y="562.0" />
+      <point x="211.03571428571428" y="562.0" />
+      <point x="-157.8125" y="266.0" />
+    </edge>
+    <edge source="com.boost.SocialCocktailJavaServer.models.Comment" target="com.boost.SocialCocktailJavaServer.models.Cocktail">
+      <point x="-131.6875" y="-170.0" />
+      <point x="245.3482142857143" y="866.0" />
+      <point x="55.625" y="866.0" />
+      <point x="-166.875" y="122.0" />
+    </edge>
+    <edge source="com.boost.SocialCocktailJavaServer.models.User" target="com.boost.SocialCocktailJavaServer.models.Cocktail">
+      <point x="-31.5625" y="266.0" />
+      <point x="337.2857142857143" y="562.0" />
+      <point x="389.375" y="562.0" />
+      <point x="166.875" y="-122.0" />
+    </edge>
+    <edge source="com.boost.SocialCocktailJavaServer.models.User" target="com.boost.SocialCocktailJavaServer.models.Comment">
+      <point x="157.8125" y="266.0" />
+      <point x="526.6607142857142" y="552.0" />
+      <point x="477.5" y="552.0" />
+      <point x="477.5" y="866.0" />
+      <point x="471.09821428571433" y="866.0" />
+      <point x="94.0625" y="-170.0" />
+    </edge>
+    <edge source="com.boost.SocialCocktailJavaServer.models.Cocktail" target="com.boost.SocialCocktailJavaServer.models.Comment">
+      <point x="166.875" y="122.0" />
+      <point x="389.375" y="866.0" />
+      <point x="358.22321428571433" y="866.0" />
+      <point x="-18.8125" y="-170.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.1" x="266.8850486431129" y="561.3161802355352" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

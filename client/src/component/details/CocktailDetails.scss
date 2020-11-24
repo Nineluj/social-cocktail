@@ -1,0 +1,104 @@
+@import '../../global';
+
+.drink-details {
+  justify-content: space-between;
+  padding: 0 32px;
+  display: flex;
+
+  .drink-thumbnail {
+    margin-left: 24px;
+    @media (max-width: 767px) {
+      img {
+        height: 120px;
+        width: auto;
+        position: absolute;
+        right: 32px;
+        display: none;
+      }
+    }
+  }
+
+  .add-tip {
+    margin-left: 8px;
+  }
+}
+
+.comment {
+  margin-bottom: 8px;
+  padding: 8px;
+
+  .comment-cocktail {
+    margin-left: 4px;
+  }
+
+  .comment-title {
+    font-size: 20px;
+  }
+
+  .comment-info {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.cocktail-info-scrollable {
+  @media (min-width: 768px) {
+    height: 400px;
+    overflow-y: scroll;
+  }
+  border-radius: 10px;
+  padding-top: 10px;
+  flex: 1;
+}
+
+.cocktail-discussion-title {
+  text-align: left;
+  color: $dark-grey;
+}
+
+textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.cocktail-likes {
+  padding: 16px;
+  margin: 16px 32px;
+  border-radius: 4px;
+}
+
+.cocktail-likers {
+  display: flex;
+  width: 98%;
+  margin: auto;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid $dark-grey;
+}
+
+.cocktail-glass {
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    filter: brightness(0.75);
+  }
+
+  @media(max-width: 767px) {
+    text-align: center;
+  }
+}
+
+.cocktail-details {
+  background: darkslategray;
+}
+
+.cocktail-details-title {
+  color: white;
+
+  @media(max-width: 767px) {
+    text-align: center;
+  }
+}

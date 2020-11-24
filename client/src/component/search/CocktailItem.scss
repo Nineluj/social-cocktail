@@ -1,0 +1,41 @@
+@import '../../Colors';
+
+#root {
+  .cocktail-card {
+    color: black;
+    background: none;
+    border: none;
+    box-shadow: 4px 4px 32px -16px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    width: 276px;
+    height: 320px;
+
+    &:hover {
+      .card-img-top {
+        filter: brightness(0.75);
+      }
+    }
+
+    .card-img-top {
+      height: 100%;
+      transition: all 0.2s;
+      width: auto;
+      overflow: hidden;
+      background-size: cover;
+    }
+
+    .cocktail-card-body {
+      position: absolute;
+      width: 100%;
+      bottom: 0px;
+      padding: 8px;
+      color: $light-grey;
+      background-image: linear-gradient(transparent, black);
+
+      .card-title {
+        font-size: 32px;
+        margin-bottom: 4px;
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@import '../Colors';
+
+.main-navbar {
+  background: $dark-grey;
+  box-shadow: 0px -4px 24px -8px rgba(0, 0, 0, 0.5);
+
+  * {
+    color: $light-grey;
+  }
+}

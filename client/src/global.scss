@@ -1,0 +1,70 @@
+@import 'Colors';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+// Font Sizes
+$large-title: 32px;
+$medium-title: 24px;
+$paragraph: 16px;
+
+// Global Styles
+* {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: $paragraph;
+}
+
+#root {
+  height: 100vh;
+  a {
+    color: $link;
+    font-size: 16px;
+  }
+
+  .navbar {
+    padding: 8px 39px;
+  }
+
+  .btn {
+    padding: 6px 12px;
+    border: none;
+  }
+
+  .btn-success {
+    background-color: $turqouise;
+    color: $dark-grey;
+  }
+
+  .btn-primary {
+    background-color: $turqouise;
+    color: $dark-grey;
+  }
+
+  .btn-danger {
+    background-color: $pink;
+    color: $light-grey;
+  }
+
+  input {
+    padding: 6px 24px;
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.25);
+    }
+  }
+}
+
+.light-background {
+  padding: 24px;
+  color: $dark-grey;
+  background: $light-grey;
+}
+
+.dark-background {
+  padding: 24px;
+  color: $light-grey;
+  background: $dark-grey;
+}
+
+.full-height {
+  min-height: calc(100vh - 82px);
+  height: max-content;
+}
