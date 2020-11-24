@@ -5,6 +5,7 @@ import com.boost.SocialCocktailJavaServer.models.Glass;
 import com.boost.SocialCocktailJavaServer.repositories.BartenderRepository;
 import com.boost.SocialCocktailJavaServer.repositories.GlassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,9 @@ public class DataLoader implements ApplicationRunner {
     private final BartenderRepository bartenderRepository;
     private final GlassRepository glassRepository;
 
+    @Value("${DEFAULT_ADMIN_PASSWORD}")
+    private String adminPassword;
+
     @Autowired
     public DataLoader(BartenderRepository bartenderRepository, GlassRepository glassRepository) {
         this.bartenderRepository = bartenderRepository;
@@ -26,9 +30,10 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
         if (bartenderRepository.findByUsername("admin") == null) {
+
             Bartender adminAccount = new Bartender();
             adminAccount.setUsername("admin");
-            adminAccount.setPassword("8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918");
+            adminAccount.setPassword(adminPassword);
             adminAccount.setVerified(true);
             adminAccount.setAdmin(true);
             adminAccount.setId(0);
