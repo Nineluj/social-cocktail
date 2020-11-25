@@ -19,33 +19,37 @@ import javax.servlet.http.HttpSession;
 @CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
 @RestController
 public class UserController {
-	
 	@Autowired
 	private UserService userService;
 
 	@JsonView(JacksonView.forUserRequest.class)
 	@PostMapping("/api/users/login")
-	public ResponseEntity authenticateUser(@RequestBody User user, HttpSession session) {
+	public ResponseEntity<HttpStatus> authenticateUser(@RequestBody User user, HttpSession session) {
 		if (session.getAttribute("userId") != null) {
-			return new ResponseEntity(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
+
 		User retrievedUser = this.userService.authenticateUser(user);
+
 		if (retrievedUser != null) {
 			session.setAttribute("userId", retrievedUser.getId());
-			return new ResponseEntity(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 	@JsonView(JacksonView.forUserRequest.class)
 	@PostMapping("/api/users/register")
-	public ResponseEntity registerUser(@RequestBody User user, HttpSession session) {
+	public ResponseEntity<HttpStatus> registerUser(@RequestBody User user, HttpSession session) {
 		User retrievedUser = this.userService.registerUser(user);
+
 		if (retrievedUser != null) {
 			session.setAttribute("userId", retrievedUser.getId());
-			return new ResponseEntity(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 
 	@JsonView(JacksonView.forUserRequest.class)

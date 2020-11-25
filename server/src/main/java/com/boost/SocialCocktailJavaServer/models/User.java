@@ -7,20 +7,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
+import java.security.SecureRandom;
 import java.util.List;
 
 @Entity
 public class User {
 	@JsonView(JacksonView.freeContext.class)
 	private String username;
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	private String password;
+
 	@JsonView(JacksonView.freeContext.class)
 	private RoleType role;
 	@JsonView(JacksonView.freeContext.class)
 	private String email;
 	@JsonView(JacksonView.freeContext.class)
 	private String phoneNum;
+
+	// This is used in the logic of the application
+	// but should never be stored in the database (ensured by Transient)
+	@Transient
+	private String password;
+	@JsonView
+	private String saltedPassword;
+
+	@JsonView(JacksonView.freeContext.class)
+	private String salt;
 
 	@JsonView(JacksonView.freeContext.class)
 	private boolean isAdmin;
@@ -33,7 +43,6 @@ public class User {
 	@JsonIgnore
 	private List<Comment> userComments;
 
-	
 	@ManyToMany
 	@JsonIgnore
 	private List<User> following;
@@ -55,13 +64,16 @@ public class User {
 		this.username = username;
 	}
 
-	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
-		this.password = Security.hash(password);
+		// when password is set we automatically generate the saltedPassword field
+		this.password = password;
+
+		this.salt = Security.generateSalt();
+		this.saltedPassword = Security.hash(password, this.salt);
 	}
 
 	public RoleType getRole() {
@@ -136,5 +148,11 @@ public class User {
 		isAdmin = admin;
 	}
 
-	public User() {}
+	public String getSaltedPassword() {
+		return saltedPassword;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
 }

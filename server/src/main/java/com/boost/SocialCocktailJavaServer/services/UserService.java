@@ -6,6 +6,7 @@ import com.boost.SocialCocktailJavaServer.models.User;
 import com.boost.SocialCocktailJavaServer.repositories.BartenderRepository;
 import com.boost.SocialCocktailJavaServer.repositories.CocktailRepository;
 import com.boost.SocialCocktailJavaServer.repositories.UserRepository;
+import com.boost.SocialCocktailJavaServer.security.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,12 @@ public class UserService {
 
 	// Authenticate that a correct username password pair was entered.
 	public User authenticateUser(User user) {
-		return this.userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		String username = user.getUsername();
+
+		String userSalt = this.userRepository.findUserSalt(username);
+		String hashedPassword = Security.hash(user.getPassword(), userSalt);
+
+		return this.userRepository.findByUsernameAndPassword(username, hashedPassword);
 	}
 
 	// Register a user.

@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Bartender extends User {
+
     @JsonView(JacksonView.freeContext.class)
     private boolean verified;
 

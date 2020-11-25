@@ -80,7 +80,7 @@
 
   .demo-results {
     overflow-y: scroll;
-    height: 512px;
+    height: 75vh;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
     grid-auto-rows: 320px;

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-
 @CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
 @RestController
 public class CocktailController {
@@ -50,12 +49,12 @@ public class CocktailController {
 	@PostMapping("/api/cocktails/{cocktailId}/likes")
 	public ResponseEntity userLikeCocktail(@PathVariable("cocktailId") int cocktailId, HttpSession session) {
 		if (session.getAttribute("userId") == null) {
-			return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 		} else {
 			if (this.cocktailService.likeCocktail(cocktailId, (Integer) session.getAttribute("userId"))) {
-				return new ResponseEntity(HttpStatus.OK);
+				return new ResponseEntity<>(HttpStatus.OK);
 			} else {
-				return new ResponseEntity(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
 		}
 	}

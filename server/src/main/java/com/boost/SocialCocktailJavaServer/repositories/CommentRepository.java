@@ -4,16 +4,22 @@ import com.boost.SocialCocktailJavaServer.models.Comment;
 
 import java.util.List;
 
+import com.mysql.cj.xdevapi.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CommentRepository extends CrudRepository<Comment, Integer> {
 	
-    @Query(value = "SELECT * FROM comment as comment ORDER BY comment.created DESC LIMIT :num_posts", nativeQuery = true)
+    @Query(value = "SELECT * FROM Comment as comment ORDER BY comment.created DESC LIMIT :num_posts", nativeQuery = true)
 	public List<Comment> getRecentComments(@Param("num_posts") Integer numPosts);
     
-    @Query(value = "SELECT * FROM comment as comment JOIN user_following ON comment.author_id=user_following.following_id WHERE user_following.user_id=:user_id ORDER BY comment.created DESC LIMIT :num_posts", nativeQuery = true)
+    @Query(value = "SELECT * FROM Comment as comment JOIN User_following as user_following " +
+            "ON comment.author_id=user_following.following_id " +
+            "WHERE user_following.user_id=:user_id ORDER BY comment.created DESC LIMIT :num_posts", nativeQuery = true)
     public List<Comment> getFollowingComments(@Param("num_posts") Integer numPosts, @Param("user_id") Integer userId);
     
     public List<Comment> findCommentsByCocktail_Id(@Param("cocktail_id") Integer cocktailId);
