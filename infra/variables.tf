@@ -16,3 +16,8 @@ variable "environment_tag" {
 variable "region" {
   description = "The region Terraform deploys your instance"
 }
+
+variable "db_password" {
+  description = "The password to use for the database"
+  type = string
+}

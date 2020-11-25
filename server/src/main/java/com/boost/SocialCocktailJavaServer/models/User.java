@@ -1,6 +1,7 @@
 package com.boost.SocialCocktailJavaServer.models;
 
 
+import com.boost.SocialCocktailJavaServer.security.Security;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -60,7 +61,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Security.hash(password);
 	}
 
 	public RoleType getRole() {

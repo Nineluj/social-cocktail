@@ -4,6 +4,8 @@ import com.boost.SocialCocktailJavaServer.models.Bartender;
 import com.boost.SocialCocktailJavaServer.models.Glass;
 import com.boost.SocialCocktailJavaServer.repositories.BartenderRepository;
 import com.boost.SocialCocktailJavaServer.repositories.GlassRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -16,6 +18,8 @@ import java.io.FileReader;
 
 @Component
 public class DataLoader implements ApplicationRunner {
+    Logger logger = LoggerFactory.getLogger(DataLoader.class);
+
     private final BartenderRepository bartenderRepository;
     private final GlassRepository glassRepository;
 
@@ -30,7 +34,6 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
         if (bartenderRepository.findByUsername("admin") == null) {
-
             Bartender adminAccount = new Bartender();
             adminAccount.setUsername("admin");
             adminAccount.setPassword(adminPassword);
@@ -40,7 +43,11 @@ public class DataLoader implements ApplicationRunner {
             bartenderRepository.save(adminAccount);
         }
 
+        // More like a utility for loading in the glass information in case it is
+        // not already in the DB. TODO: remove at some point
         if (glassRepository.count() == 0) {
+            logger.info("No glass data in database, writing it in");
+
             // load data from file
             try {
                 String[] lines = new String[2];
@@ -64,5 +71,7 @@ public class DataLoader implements ApplicationRunner {
                 e.printStackTrace();
             }
         }
+
+        logger.info("Done reading the data");
     }
 }

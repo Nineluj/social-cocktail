@@ -20,6 +20,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.15</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -41,32 +46,17 @@
 
 	<build>
 		<plugins>
-<!--			<plugin>-->
-<!--				<groupId>org.springframework.boot</groupId>-->
-<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--				<configuration>-->
-<!--					<mainClass>com.boost.SocialCocktailJavaServer.SocialCocktailBackend</mainClass>-->
-<!--				</configuration>-->
-<!--			</plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--            </plugin>-->
 			<plugin>
-				<groupId>de.ntcomputer</groupId>
-				<artifactId>executable-packer-maven-plugin</artifactId>
-				<version>1.0.1</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>com.boost.SocialCocktailJavaServer.SocialCocktailBackend</mainClass>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>pack-executable-jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
         </plugins>
 	</build>
 </project>
