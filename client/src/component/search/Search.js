@@ -1,7 +1,6 @@
 import React from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
+import { Col, Form, Row } from 'react-bootstrap';
 import CocktailItem from './CocktailItem';
-import Image from 'react-bootstrap/Image';
 import { Link } from 'react-router-dom';
 import CocktailDBApiService from '../../services/CocktailDBApiService';
 import { Redirect } from 'react-router';
@@ -65,6 +64,7 @@ class Search extends React.Component {
           <div className="demo-main-div">
             <Row>
               <img
+                  alt="social cocktail logo"
                   className="logo"
                   height="120px"
                   width="120px"

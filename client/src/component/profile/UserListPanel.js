@@ -1,9 +1,6 @@
 import React from 'react'
 import {Card} from 'react-bootstrap';
 import {Link} from 'react-router-dom'
-import UserService from '../../services/UserService';
-
-let userService = UserService.getInstance();
 
 const UserListPanel = ({title, users, following, loggedInId, getLoggedInFollowing}) =>
     <Card>

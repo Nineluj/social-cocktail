@@ -8,11 +8,11 @@ import java.security.SecureRandom;
  * Class to have a baseline level of security
  */
 public final class Security {
-    // The length of the salts generated
-    private static final int SaltLength = 16;
-
     // Limit the length of the password hashes so that they don't get too angry
     private static final int HashedPasswordLength = 32;
+
+    // The length of the salts generated
+    private static final int SaltLength = HashedPasswordLength;
 
     /**
      * Hashes the given password with the salt
