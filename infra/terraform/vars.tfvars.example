@@ -1,0 +1,4 @@
+region="us-east-1"
+db_password = ""
+packer_ami_id=""
+public_key_path="resources/key.pub"

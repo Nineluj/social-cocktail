@@ -1,4 +1,4 @@
-**/.terraform/*
+.terraform/plugins
 
 # .tfstate files
 *.tfstate
