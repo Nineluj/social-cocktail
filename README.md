@@ -5,4 +5,4 @@
 ![Screenshot of details page](./assets/images/details.png)
 
 ## Architecture
-![Architecture Diagram](./assets/images/blast-radius.svg)
+![Architecture Diagram](./assets/images/architecture.svg)
