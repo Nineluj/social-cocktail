@@ -1,13 +1,15 @@
 package com.boost.SocialCocktailJavaServer.security;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 /**
  * Class to have a baseline level of security
  */
 public final class Security {
+    private static final String algorithm = "SHA-256";
+
     // Limit the length of the password hashes so that they don't get too angry
     private static final int HashedPasswordLength = 32;
 
@@ -19,9 +21,18 @@ public final class Security {
      * @return Hexadecimal string of 32 characters
      */
     public static String hash(String password, String salt) {
-        byte[] byteDigest = DigestUtils.getSha3_512Digest().digest((salt + password).getBytes());
+        MessageDigest md = Security.getDigest();
+        byte[] byteDigest = md.digest((salt + password).getBytes());
 
         return toHex(byteDigest, HashedPasswordLength);
+    }
+
+    private static MessageDigest getDigest() {
+        try {
+            return MessageDigest.getInstance(algorithm);
+        } catch (NoSuchAlgorithmException algorithmException) {
+            throw new IllegalArgumentException(String.format("Can't use %s", Security.algorithm));
+        }
     }
 
     /**

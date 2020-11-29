@@ -38,7 +38,9 @@ public class UserService {
 	// Register a user.
 	public User registerUser(User user) {
 		if (this.userRepository.findByUsername(user.getUsername()) == null) {
+			// TODO: enforce password requirements
 			user.setAdmin(false);
+			user.generatePasswordFromSalt();
 			return this.userRepository.save(user);
 		}
 		return null;

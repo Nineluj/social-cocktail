@@ -5,6 +5,7 @@ export default class UserService {
     constructor() {
         this.authenticateUserUrl = `${API_ROOT}/users/login`;
         this.registerUserUrl = `${API_ROOT}/users/register`;
+        console.log(this.registerUserUrl)
         this.registerBartenderUrl = `${API_ROOT}/users/bartender`;
         this.getLoggedInUserUrl = `${API_ROOT}/user`
         this.logoutUserUrl = `${API_ROOT}/user/logout`

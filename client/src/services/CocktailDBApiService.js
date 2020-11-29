@@ -1,8 +1,6 @@
 
 export default class CocktailDBApiService {
     constructor() {
-        this.pathHost = window.location.hostname === 'localhost' ? 'localhost:8080' : '';
-
         this.searchCocktailUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=SEARCH_TERM';
         this.getCocktailDetailsByIdUrl = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=COCKTAIL_ID';
     }

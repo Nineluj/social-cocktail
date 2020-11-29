@@ -49,7 +49,7 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 
-		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
 	@JsonView(JacksonView.forUserRequest.class)
@@ -85,10 +85,17 @@ public class UserController {
 	@GetMapping("/api/user")
 	public ResponseEntity<User> getLoggedInUser(HttpSession session, HttpServletResponse response) {
 		if (session.getAttribute("userId") != null) {
-			return new ResponseEntity<>(this.userService.findUserById((Integer)session.getAttribute("userId")), HttpStatus.OK);
+			Integer userId = (Integer)session.getAttribute("userId");
+			User u = this.userService.findUserById(userId);
+
+			if (u == null) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+
+			return new ResponseEntity<>(u, HttpStatus.OK);
 		}
 
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
 	// Logout the currently logged in User, invalidating the HttpSession.

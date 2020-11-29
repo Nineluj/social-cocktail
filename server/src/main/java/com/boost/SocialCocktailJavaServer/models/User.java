@@ -2,6 +2,7 @@ package com.boost.SocialCocktailJavaServer.models;
 
 
 import com.boost.SocialCocktailJavaServer.security.Security;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -71,7 +72,9 @@ public class User {
 	public void setPassword(String password) {
 		// when password is set we automatically generate the saltedPassword field
 		this.password = password;
+	}
 
+	public void generatePasswordFromSalt() {
 		this.salt = Security.generateSalt();
 		this.saltedPassword = Security.hash(password, this.salt);
 	}
