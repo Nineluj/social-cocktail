@@ -10,7 +10,11 @@ resource "aws_subnet" "public_1" {
   cidr_block              = var.cidr_subnets[0]
   availability_zone = "${var.region}${var.primary_availability_zone_ext}"
 
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
+
+  tags = {
+    Name = "public_1"
+  }
 }
 
 resource "aws_subnet" "public_2" {
@@ -18,7 +22,11 @@ resource "aws_subnet" "public_2" {
   cidr_block = var.cidr_subnets[3]
   availability_zone = "${var.region}${var.secondary_availability_zone_ext}"
 
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
+
+  tags = {
+    Name = "public_2"
+  }
 }
 
 ##
@@ -27,14 +35,53 @@ resource "aws_subnet" "private_1" {
   vpc_id = aws_vpc.vpc.id
   cidr_block = var.cidr_subnets[1]
   availability_zone = "${var.region}${var.primary_availability_zone_ext}"
+
+  map_public_ip_on_launch = false
+
+  tags = {
+    Name = "private_1"
+  }
 }
 
 resource "aws_subnet" "private_2" {
   vpc_id = aws_vpc.vpc.id
   cidr_block = var.cidr_subnets[2]
   availability_zone = "${var.region}${var.secondary_availability_zone_ext}"
+
+  map_public_ip_on_launch = false
+
+  tags = {
+    Name = "private_2"
+  }
 }
 
+# Since both private subnets are only MySQL instances we only
+# want them to receive traffic on tcp:3306
+resource "aws_network_acl" "private_acl" {
+  vpc_id = aws_vpc.vpc.id
+  subnet_ids = [aws_subnet.private_1.id, aws_subnet.private_2.id]
+
+  ingress {
+    rule_no = 100
+    action = "allow"
+    from_port = 3306
+    to_port = 3306
+    protocol = "tcp"
+    cidr_block = aws_vpc.vpc.cidr_block
+  }
+
+  egress {
+    rule_no = 200
+    action = "allow"
+    from_port = 0
+    to_port = 0
+    protocol = -1
+    cidr_block = aws_vpc.vpc.cidr_block
+  }
+}
+
+# Needed since the aws_db_instance wants to be able to spread across two
+# AZs, not doing this since not horizontally scaling but still needed
 resource "aws_db_subnet_group" "main" {
   subnet_ids = [aws_subnet.private_1.id, aws_subnet.private_2.id]
 }
@@ -87,15 +134,12 @@ resource "aws_route_table" "nat_gw" {
   }
 }
 
-##
+# Let the private subnet talk with the outside through
+# the nat gateway
 resource "aws_route_table_association" "nat_gw_rt" {
   subnet_id = aws_subnet.private_1.id
   route_table_id = aws_route_table.nat_gw.id
 }
-
-//resource "aws_network_acl" "backend" {
-//  vpc_id = aws_vpc.vpc.id
-//}
 
 resource "aws_security_group" "alb" {
   description = "HTTP"

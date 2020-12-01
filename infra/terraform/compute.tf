@@ -19,10 +19,12 @@ resource "aws_launch_configuration" "main" {
   key_name = aws_key_pair.project-key.key_name
   security_groups = [aws_security_group.backend.id]
 
+  iam_instance_profile = aws_iam_instance_profile.db_password_retriever.name
+
   // putting password here isn't great, should use AWS SecretsManager
   user_data_base64 = base64encode(<<EOF
 #!/bin/bash
-export DB_PASSWORD=${var.db_password} DB_URL=mysql://${aws_db_instance.main.address}/social_cocktail_db && screen -d -m java -jar /app/app.jar
+export REGION=${var.region} SECRETS_NAME=${module.secrets-manager.secret_arns[0]} DB_HOST=${aws_db_instance.main.address} && screen -L -d -m java -jar /app/app.jar
 EOF
 )
 

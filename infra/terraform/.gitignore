@@ -32,4 +32,5 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-terraform/resources/key*
+.terraform
+resources/key*

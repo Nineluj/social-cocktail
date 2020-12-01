@@ -29,7 +29,7 @@
         "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done",
         "sudo mkdir /app/",
         "sudo chown ec2-user /app",
-        "sudo yum install -y java-1.8.0-openjdk"
+        "sudo yum install -y java-1.8.0-openjdk-headless"
       ]
     },
     {

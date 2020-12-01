@@ -6,7 +6,7 @@ resource "aws_db_instance" "main" {
   password = var.db_password
   engine = "mysql"
   engine_version = "8.0"
-  # TODO: change this to keep the snapshot
+  # might want to change this to keep the snapshot
   skip_final_snapshot = true
 
   publicly_accessible = false
@@ -15,11 +15,11 @@ resource "aws_db_instance" "main" {
   db_subnet_group_name = aws_db_subnet_group.main.name
   vpc_security_group_ids = [aws_security_group.mysql.id]
 
-//  provisioner "local-exec" {
-//    command = <<EOF
-//ansible-playbook ../playbooks/database.yaml --extra-vars "DB_USER=${self.username} DB_PASSWORD=${var.db_password} DB_HOST=${self.address}"
-//EOF
-//  }
+  lifecycle {
+    ignore_changes = [
+      snapshot_identifier
+    ]
+  }
 }
 
 # S3
@@ -42,10 +42,6 @@ data "aws_iam_policy_document" "website_policy" {
     ]
   }
 }
-
-//resource "aws_iam_policy" "website_policy" {
-//  policy = data.aws_iam_policy_document.website_policy.json
-//}
 
 resource "aws_s3_bucket_policy" "website_bucket_policy" {
   bucket = aws_s3_bucket.client_main.bucket

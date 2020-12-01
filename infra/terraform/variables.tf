@@ -42,3 +42,7 @@ variable "public_key_path" {
   description = "The path to a public key (.pub). Provided so that you can SSH into the EC2 instances."
   type = string
 }
+
+//variable "use-snapshot-base" {
+//  type = bool
+//}
